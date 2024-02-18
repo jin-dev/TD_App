@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 
 import LottieView from 'lottie-react-native';
-
+import useBearStore from './store/dataStore';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
@@ -54,6 +54,8 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const bears = useBearStore(state => state.bears);
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -73,6 +75,7 @@ function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="See Your Changes122" />
+          <Text>{bears}</Text>
           <LottieView
             source={require('./assets/lottieFiles/lottie_skateBoard.json')}
             autoPlay
