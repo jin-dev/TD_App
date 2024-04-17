@@ -18,6 +18,8 @@ import {
   View,
   Image,
   TextInput,
+  Dimensions,
+  Button,
 } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import LottieView from 'lottie-react-native';
@@ -35,27 +37,21 @@ const Header = () => {
     <View
       style={{
         flex: 1,
-        marginTop: 50,
+        marginTop: 80,
         padding: 10,
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        height: 200,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderStyle: 'solid',
+        height: '20%',
       }}>
       <View
         style={{
           width: '100%',
-          height: '80%',
+          height: '20%',
           flexDirection: 'row',
           justifyContent: 'space-evenly',
           alignItems: 'center',
-          borderWidth: 1,
-          borderColor: 'red',
-          borderStyle: 'solid',
         }}>
         <Image
           style={{
@@ -75,7 +71,7 @@ const Header = () => {
       <View
         style={{
           width: '80%',
-          height: '20%',
+          height: '10%',
           justifyContent: 'center',
           alignItems: 'center',
           borderWidth: 1,
@@ -118,38 +114,72 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
+const MainBody = () => {
+  /*
+ <LottieView
+        source={require('./assets/lottieFiles/lottie_skateBoard.json')}
+        autoPlay
+        loop
+        style={{width: 100, height: 100}}
+      />
+*/
+
+  return (
+    <View style={styles.baseSection}>
+      <View style={styles.baseSection2}>
+        <View
+          style={{
+            width: 140,
+            height: 280,
+            backgroundColor: '#414141',
+            borderRadius: 10,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
+            style={{width: 114, height: 135}}
+            source={require('./assets/homeScreen/coffee_1.png')}
+          />
+          <Text style={{color: 'white'}}>Drizzled with Caremel</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text>$5.99</Text>
+            <Button title="+" color="#EFE3C8" />
+          </View>
+        </View>
+        <View
+          style={{
+            width: 140,
+            height: 280,
+            backgroundColor: '#414141',
+            borderRadius: 10,
+          }}>
+          <Text>HAHA</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  //const isDarkMode = useColorScheme() === 'dark';
 
   const bears = useBearStore((state: any) => state.bears);
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    backgroundColor: '#201520',
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+      <StatusBar barStyle={'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
+        style={styles.sectionBackground}>
+        <View>
           <Header />
-          <Section title="See Your Changes12211" />
+          <MainBody />
           <Text>{bears}</Text>
-          <Text style={tw`text-yellow-700`}>Jin1129</Text>
-          <LottieView
-            source={require('./assets/lottieFiles/lottie_skateBoard.json')}
-            autoPlay
-            loop
-            style={{width: 100, height: 100}}
-          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -172,6 +202,31 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  baseSection: {
+    padding: 10,
+    height: 600,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'red',
+    borderStyle: 'solid',
+  },
+  baseSection2: {
+    flexDirection: 'row',
+    width: '100%',
+    marginBottom: 5,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  sectionBackground: {
+    backgroundColor: '#201520',
+    height: 800,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderStyle: 'solid',
   },
 });
 
